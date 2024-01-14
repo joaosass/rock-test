@@ -1,0 +1,10 @@
+{
+  "resourceName": "rockdb",
+  "tableName": "rocks",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

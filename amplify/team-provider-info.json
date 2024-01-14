@@ -9,11 +9,24 @@
       "UnauthRoleName": "amplify-rocktest-dev-171233-unauthRole",
       "StackName": "amplify-rocktest-dev-171233",
       "StackId": "arn:aws:cloudformation:us-east-1:891376949070:stack/amplify-rocktest-dev-171233/25499090-b250-11ee-86ad-0e844d943705",
-      "AmplifyAppId": "d7myl4hyr23qt"
+      "AmplifyAppId": "d7myl4hyr23qt",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-rocktest-dev-171233-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "rocktest908f096a": {}
+      },
+      "function": {
+        "rockcrud": {
+          "deploymentBucketName": "amplify-rocktest-dev-171233-deployment",
+          "s3Key": "amplify-builds/rockcrud-776d586352646573366a-build.zip"
+        }
+      },
+      "api": {
+        "rockapi": {}
+      },
+      "storage": {
+        "rockdb": {}
       }
     }
   }

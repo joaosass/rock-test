@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/rocks": {
+      "name": "/rocks",
+      "lambdaFunction": "rockcrud",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}
