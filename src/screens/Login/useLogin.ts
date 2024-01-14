@@ -4,7 +4,7 @@ import {signIn, fetchAuthSession} from 'aws-amplify/auth';
 import {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 
-import {RootStackParamList} from '../../App';
+import {RootStackParamList} from '../../types';
 
 import schema from './loginSchema';
 import type {SCHEMA_TYPE} from './loginSchema';

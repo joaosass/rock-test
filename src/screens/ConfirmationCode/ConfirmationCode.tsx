@@ -5,7 +5,7 @@ import {Controller} from 'react-hook-form';
 import {Button, IconButton, Text, TextInput} from 'react-native-paper';
 
 import styles from '../../styles';
-import {RootStackParamList} from '../../App';
+import {RootStackParamList} from '../../types';
 
 import useConfirmationCode from './useConfirmationCode';
 

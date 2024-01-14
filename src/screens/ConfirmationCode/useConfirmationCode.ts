@@ -3,8 +3,8 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {confirmSignUp} from 'aws-amplify/auth';
 import {useForm} from 'react-hook-form';
 
-import {RootStackParamList} from '../../App';
 import useStore from '../../store';
+import {RootStackParamList} from '../../types';
 
 import schema from './codeSchema';
 import type {SCHEMA_TYPE} from './codeSchema';
