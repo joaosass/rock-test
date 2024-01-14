@@ -2,6 +2,7 @@
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 const AWS = require('aws-sdk');
+const {v4: uuidv4} = require('uuid');
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const TableName = 'rocks-dev';
@@ -11,10 +12,10 @@ const list = async () => {
   return result.Items;
 };
 
-const create = async Item => {
+const create = async item => {
   const params = {
     TableName,
-    Item,
+    Item: {...item, id: uuidv4()},
   };
 
   try {
@@ -68,7 +69,6 @@ exports.handler = async ({
   queryStringParameters,
   ...event
 }) => {
-  console.log(event);
   let response;
   switch (httpMethod) {
     case 'GET':

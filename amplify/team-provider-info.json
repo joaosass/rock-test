@@ -19,7 +19,7 @@
       "function": {
         "rockcrud": {
           "deploymentBucketName": "amplify-rocktest-dev-171233-deployment",
-          "s3Key": "amplify-builds/rockcrud-776d586352646573366a-build.zip"
+          "s3Key": "amplify-builds/rockcrud-557635596b4e36494552-build.zip"
         }
       },
       "api": {
