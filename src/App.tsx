@@ -10,13 +10,8 @@ import CreateUser from './screens/CreateUser';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import theme from './theme';
-
-export type RootStackParamList = {
-  ConfirmationCode: undefined;
-  CreateUser: undefined;
-  Home: undefined;
-  Login: undefined;
-};
+import Form from './screens/Form';
+import {RootStackParamList} from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -33,6 +28,7 @@ function App(): React.JSX.Element {
           }}>
           <Stack.Screen name="ConfirmationCode" component={ConfirmationCode} />
           <Stack.Screen name="CreateUser" component={CreateUser} />
+          <Stack.Screen name="Form" component={Form} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
