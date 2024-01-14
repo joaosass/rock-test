@@ -9,7 +9,9 @@ interface User {
 
 interface State {
   user: User;
+  token: string;
   setUser: (email: string, name: string) => void;
+  setToken: (token: string) => void;
 }
 
 const useStore = create<State>()(
@@ -18,7 +20,9 @@ const useStore = create<State>()(
       email: '',
       name: '',
     },
+    token: '',
     setUser: (email, name) => set(() => ({user: {email, name}})),
+    setToken: token => set(() => ({token})),
   })),
 );
 
