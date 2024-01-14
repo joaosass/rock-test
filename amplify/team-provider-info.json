@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-rocktest-dev-171233-authRole",
+      "UnauthRoleArn": "arn:aws:iam::891376949070:role/amplify-rocktest-dev-171233-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::891376949070:role/amplify-rocktest-dev-171233-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-rocktest-dev-171233-deployment",
+      "UnauthRoleName": "amplify-rocktest-dev-171233-unauthRole",
+      "StackName": "amplify-rocktest-dev-171233",
+      "StackId": "arn:aws:cloudformation:us-east-1:891376949070:stack/amplify-rocktest-dev-171233/25499090-b250-11ee-86ad-0e844d943705",
+      "AmplifyAppId": "d7myl4hyr23qt"
+    },
+    "categories": {
+      "auth": {
+        "rocktest908f096a": {}
+      }
+    }
+  }
+}
