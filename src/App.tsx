@@ -26,7 +26,7 @@ function App(): React.JSX.Element {
       <Snackbar />
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="CreateUser"
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}>

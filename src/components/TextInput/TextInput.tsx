@@ -1,29 +1,44 @@
 import React from 'react';
+import {
+  Control,
+  Controller,
+  FieldPath,
+  FieldValues,
+  UseFormWatch,
+} from 'react-hook-form';
 import {View} from 'react-native';
 import {HelperText, TextInput} from 'react-native-paper';
 
-import {Control, Controller, FieldPath, FieldValues} from 'react-hook-form';
+import PasswordRequirements from '../PasswordRequirements';
+
 import useTextInput from './useTextInput';
 
 interface TextInputProps<T extends FieldValues> {
   control: Control<T>;
   errorMessage?: string;
+  hasPasswordRequirements?: boolean;
   label: string;
   name: FieldPath<T>;
   type?: string;
+  watch?: UseFormWatch<T>;
 }
 
 function TextInputComponent<T extends FieldValues>({
   control,
   errorMessage,
+  hasPasswordRequirements,
   label,
   name,
   type,
+  watch,
 }: TextInputProps<T>): React.JSX.Element {
   const {handleCurrency, handleType} = useTextInput();
 
   return (
     <View>
+      {hasPasswordRequirements ? (
+        <PasswordRequirements<T> watch={watch} />
+      ) : null}
       <Controller
         control={control}
         name={name}

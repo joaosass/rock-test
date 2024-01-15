@@ -14,7 +14,8 @@ import {SCHEMA_TYPE} from './userSchema';
 type CreateUserProps = NativeStackScreenProps<RootStackParamList, 'CreateUser'>;
 
 function CreateUser({navigation}: CreateUserProps): React.JSX.Element {
-  const {control, errors, isLoading, isValid, handleSubmit} = useCreateUser();
+  const {control, errors, isLoading, isValid, watch, handleSubmit} =
+    useCreateUser();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
@@ -39,10 +40,12 @@ function CreateUser({navigation}: CreateUserProps): React.JSX.Element {
           />
           <TextInput<SCHEMA_TYPE>
             control={control}
+            watch={watch}
             label="Senha"
             name="password"
             errorMessage={errors.password?.message}
             type="password"
+            hasPasswordRequirements
           />
           <TextInput<SCHEMA_TYPE>
             control={control}

@@ -18,6 +18,7 @@ const useCreateUser = () => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: {errors, isValid},
   } = useForm({
     resolver: yupResolver(schema),
@@ -56,6 +57,7 @@ const useCreateUser = () => {
     errors,
     isLoading,
     isValid,
+    watch,
     handleSubmit: handleSubmit(handleCreateUser),
   };
 };
