@@ -1,10 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Text, TextInput} from 'react-native-paper';
+import {HelperText, TextInput} from 'react-native-paper';
 
 import {Control, Controller, FieldPath, FieldValues} from 'react-hook-form';
 import useTextInput from './useTextInput';
-import styles from './styles';
 
 interface TextInputProps<T extends FieldValues> {
   control: Control<T>;
@@ -24,7 +23,7 @@ function TextInputComponent<T extends FieldValues>({
   const {handleCurrency, handleType} = useTextInput();
 
   return (
-    <View style={styles.textInputGap}>
+    <View>
       <Controller
         control={control}
         name={name}
@@ -44,7 +43,7 @@ function TextInputComponent<T extends FieldValues>({
         )}
       />
       {errorMessage ? (
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
+        <HelperText type="error">{errorMessage}</HelperText>
       ) : null}
     </View>
   );
