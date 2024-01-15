@@ -8,7 +8,7 @@ import {apiName, path} from '../../constants';
 const useHome = () => {
   const [list, setList] = useState<Rock[]>([]);
   const [loading, setLoading] = useState(true);
-  const {token} = useStore();
+  const {refetchListKey, token} = useStore();
 
   const handleList = async () => {
     try {
@@ -23,16 +23,15 @@ const useHome = () => {
       });
       const {body} = await response;
       setList((await body.json()) as unknown as Rock[]);
-    } catch (error) {
-      console.log(error);
-    }
+      setLoading(false);
+    } catch (error) {}
   };
 
   useEffect(() => {
+    setLoading(true);
     handleList();
-    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refetchListKey]);
 
   return {list, loading};
 };

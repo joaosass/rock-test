@@ -1,6 +1,7 @@
 import {yupResolver} from '@hookform/resolvers/yup';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {confirmSignUp} from 'aws-amplify/auth';
+import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 
 import useStore from '../../store';
@@ -10,6 +11,7 @@ import schema from './codeSchema';
 import type {SCHEMA_TYPE} from './codeSchema';
 
 const useConfirmationCode = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     user: {email},
   } = useStore();
@@ -18,26 +20,32 @@ const useConfirmationCode = () => {
   const {
     control,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isValid},
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const handleConfirmationCode = async ({code}: SCHEMA_TYPE) => {
-    console.log(code);
-    console.log(email);
+    setIsLoading(true);
     try {
       await confirmSignUp({
         username: email,
         confirmationCode: code,
       });
+      setIsLoading(false);
       navigation.navigate('Login');
     } catch (error) {
-      console.log('error signing up:', error);
+      setIsLoading(false);
     }
   };
 
-  return {control, errors, handleSubmit: handleSubmit(handleConfirmationCode)};
+  return {
+    control,
+    errors,
+    isLoading,
+    isValid,
+    handleSubmit: handleSubmit(handleConfirmationCode),
+  };
 };
 
 export default useConfirmationCode;

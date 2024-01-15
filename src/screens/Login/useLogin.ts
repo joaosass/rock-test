@@ -1,7 +1,7 @@
 import {yupResolver} from '@hookform/resolvers/yup';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {signIn, fetchAuthSession} from 'aws-amplify/auth';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 
 import {RootStackParamList} from '../../types';
@@ -11,18 +11,20 @@ import type {SCHEMA_TYPE} from './loginSchema';
 import useStore from '../../store';
 
 const useLogin = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const {setToken} = useStore();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const {
     control,
     handleSubmit,
-    formState: {errors},
+    formState: {errors, isValid},
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
+    setIsLoading(true);
     handleAutoLogin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,20 +49,35 @@ const useLogin = () => {
       const token = await handleAuthToken();
 
       if (token) {
-        handleLoggedUser(token);
+        return handleLoggedUser(token);
       }
-    } catch (error) {}
-  };
-
-  const handleLogin = async ({email, password}: SCHEMA_TYPE) => {
-    const {isSignedIn} = await signIn({username: email, password});
-
-    if (isSignedIn) {
-      handleAutoLogin();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
     }
   };
 
-  return {control, errors, handleSubmit: handleSubmit(handleLogin)};
+  const handleLogin = async ({email, password}: SCHEMA_TYPE) => {
+    setIsLoading(true);
+    try {
+      const {isSignedIn} = await signIn({username: email, password});
+
+      if (isSignedIn) {
+        setIsLoading(false);
+        handleAutoLogin();
+      }
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    control,
+    errors,
+    isLoading,
+    isValid,
+    handleSubmit: handleSubmit(handleLogin),
+  };
 };
 
 export default useLogin;

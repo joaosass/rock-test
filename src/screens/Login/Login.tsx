@@ -1,18 +1,19 @@
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
+import {Button as ButtonPaper, Text, TextInput} from 'react-native-paper';
 
 import styles from '../../styles';
 import {RootStackParamList} from '../../types';
 
 import useLogin from './useLogin';
 import {Controller} from 'react-hook-form';
+import Button from '../../components/Button';
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 function Login({navigation}: LoginProps): React.JSX.Element {
-  const {control, handleSubmit} = useLogin();
+  const {control, isLoading, isValid, handleSubmit} = useLogin();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
@@ -54,12 +55,15 @@ function Login({navigation}: LoginProps): React.JSX.Element {
           />
         </View>
         <View style={styles.inputsContainer}>
-          <Button mode="contained" onPress={handleSubmit}>
-            <Text>Entrar</Text>
-          </Button>
-          <Button onPress={() => navigation.navigate('CreateUser')}>
+          <Button
+            isDisabled={!isValid}
+            isLoading={isLoading}
+            onPress={handleSubmit}
+            text="Entrar"
+          />
+          <ButtonPaper onPress={() => navigation.navigate('CreateUser')}>
             Criar conta
-          </Button>
+          </ButtonPaper>
         </View>
       </ScrollView>
     </SafeAreaView>

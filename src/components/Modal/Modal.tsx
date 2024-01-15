@@ -1,17 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
-import {
-  ActivityIndicator,
-  Button,
-  Modal,
-  Portal,
-  Text,
-} from 'react-native-paper';
+import {Button as ButtonPaper, Modal, Portal, Text} from 'react-native-paper';
 
 import {default as globalStyles} from '../../styles';
 
 import styles from './styles';
 import useModal from './useModal';
+import Button from '../Button';
 
 function ModalComponent(): React.JSX.Element {
   const {isLoading, isModalVisible, handleClose, handleDeleteRock} = useModal();
@@ -26,13 +21,12 @@ function ModalComponent(): React.JSX.Element {
           Deseja mesmo excluir esta pedra?
         </Text>
         <View style={styles.buttonsContainer}>
-          <Button onPress={handleClose}>Cancelar</Button>
+          <ButtonPaper onPress={handleClose}>Cancelar</ButtonPaper>
           <Button
-            disabled={isLoading}
-            mode="contained"
-            onPress={handleDeleteRock}>
-            {isLoading ? <ActivityIndicator /> : 'Excluir'}
-          </Button>
+            isLoading={isLoading}
+            text="Excluir"
+            onPress={handleDeleteRock}
+          />
         </View>
       </Modal>
     </Portal>

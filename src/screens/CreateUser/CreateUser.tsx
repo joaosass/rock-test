@@ -1,23 +1,24 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Controller} from 'react-hook-form';
-import {Button, IconButton, Text, TextInput} from 'react-native-paper';
+import {IconButton, Text, TextInput} from 'react-native-paper';
 
 import styles from '../../styles';
 import {RootStackParamList} from '../../types';
 
 import useCreateUser from './useCreateUser';
+import Button from '../../components/Button';
 
 type CreateUserProps = NativeStackScreenProps<RootStackParamList, 'CreateUser'>;
 
 function CreateUser({navigation}: CreateUserProps): React.JSX.Element {
-  const {control, handleSubmit} = useCreateUser();
+  const {control, isLoading, isValid, handleSubmit} = useCreateUser();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
       <IconButton icon="arrow-left" onPress={() => navigation.pop()} />
-      <View style={[styles.container, styles.fullScreen]}>
+      <ScrollView contentContainerStyle={[styles.container, styles.fullScreen]}>
         <Text variant="headlineMedium" style={styles.title}>
           Crie sua conta
         </Text>
@@ -76,10 +77,13 @@ function CreateUser({navigation}: CreateUserProps): React.JSX.Element {
             )}
           />
         </View>
-        <Button mode="contained" onPress={handleSubmit}>
-          Próximo
-        </Button>
-      </View>
+        <Button
+          isDisabled={!isValid}
+          isLoading={isLoading}
+          onPress={handleSubmit}
+          text="Próximo"
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }

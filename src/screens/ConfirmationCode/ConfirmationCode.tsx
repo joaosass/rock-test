@@ -1,13 +1,14 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Controller} from 'react-hook-form';
-import {Button, IconButton, Text, TextInput} from 'react-native-paper';
+import {IconButton, Text, TextInput} from 'react-native-paper';
 
 import styles from '../../styles';
 import {RootStackParamList} from '../../types';
 
 import useConfirmationCode from './useConfirmationCode';
+import Button from '../../components/Button';
 
 type ConfirmationCodeProps = NativeStackScreenProps<
   RootStackParamList,
@@ -17,12 +18,12 @@ type ConfirmationCodeProps = NativeStackScreenProps<
 function ConfirmationCode({
   navigation,
 }: ConfirmationCodeProps): React.JSX.Element {
-  const {control, handleSubmit} = useConfirmationCode();
+  const {control, handleSubmit, isLoading, isValid} = useConfirmationCode();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
       <IconButton icon="arrow-left" onPress={() => navigation.pop()} />
-      <View style={[styles.container, styles.fullScreen]}>
+      <ScrollView contentContainerStyle={[styles.container, styles.fullScreen]}>
         <Text variant="headlineMedium" style={styles.title}>
           Confirme seu email
         </Text>
@@ -41,10 +42,13 @@ function ConfirmationCode({
             )}
           />
         </View>
-        <Button mode="contained" onPress={handleSubmit}>
-          Criar conta
-        </Button>
-      </View>
+        <Button
+          isDisabled={isValid}
+          isLoading={isLoading}
+          text="Criar conta"
+          onPress={handleSubmit}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }
