@@ -12,6 +12,7 @@ import Login from './screens/Login';
 import theme from './theme';
 import Form from './screens/Form';
 import {RootStackParamList} from './types';
+import Modal from './components/Modal';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -20,6 +21,7 @@ Amplify.configure(config);
 function App(): React.JSX.Element {
   return (
     <PaperProvider theme={theme}>
+      <Modal />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Login"
