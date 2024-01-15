@@ -12,7 +12,7 @@ import useStore from '../../store';
 
 const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {setToken} = useStore();
+  const {setSnackbar, setToken} = useStore();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const {
@@ -68,6 +68,11 @@ const useLogin = () => {
         handleAutoLogin();
       }
     } catch (error) {
+      setSnackbar({
+        isVisible: true,
+        message: 'Erro ao realizar login',
+        type: 'error',
+      });
       setIsLoading(false);
     }
   };

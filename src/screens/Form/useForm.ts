@@ -18,7 +18,8 @@ import type {SCHEMA_TYPE} from './formSchema';
 
 const useForm = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {editingRock, token, setEditingRock, setRefetchListKey} = useStore();
+  const {editingRock, token, setEditingRock, setRefetchListKey, setSnackbar} =
+    useStore();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -64,8 +65,18 @@ const useForm = () => {
       setEditingRock();
       setRefetchListKey();
       setIsLoading(false);
+      setSnackbar({
+        isVisible: true,
+        message: `Pedra ${isEditing ? 'editada' : 'criada'} com sucesso`,
+        type: 'success',
+      });
       navigation.navigate('Home');
     } catch (error) {
+      setSnackbar({
+        isVisible: true,
+        message: `Erro ao ${isEditing ? 'editar' : 'criar'} pedra`,
+        type: 'error',
+      });
       setIsLoading(false);
     }
   };

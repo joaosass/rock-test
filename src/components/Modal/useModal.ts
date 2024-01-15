@@ -13,6 +13,7 @@ const useModal = () => {
     setEditingRock,
     setIsModalVisible,
     setRefetchListKey,
+    setSnackbar,
   } = useStore();
 
   const handleClose = () => {
@@ -36,8 +37,18 @@ const useModal = () => {
       await response;
       setRefetchListKey();
       setIsLoading(false);
+      setSnackbar({
+        isVisible: true,
+        message: 'Pedra excluída com sucesso',
+        type: 'success',
+      });
       handleClose();
     } catch (error) {
+      setSnackbar({
+        isVisible: true,
+        message: 'Erro ao excluir pedra',
+        type: 'error',
+      });
       setIsLoading(false);
     }
   };

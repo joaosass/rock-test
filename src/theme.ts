@@ -5,8 +5,9 @@ const theme = {
   roundness: 3,
   colors: {
     ...DefaultTheme.colors,
-    surfaceVariant: '#fff',
+    inversePrimary: '#212121',
     primary: '#1EC677',
+    surfaceVariant: '#fff',
   },
 };
 

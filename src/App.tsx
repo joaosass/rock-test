@@ -3,16 +3,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {PaperProvider} from 'react-native-paper';
 import React from 'react';
 import {Amplify} from 'aws-amplify';
-import config from './amplifyconfiguration.json';
 
+import config from './amplifyconfiguration.json';
+import Modal from './components/Modal';
+import Snackbar from './components/Snackbar';
 import ConfirmationCode from './screens/ConfirmationCode';
 import CreateUser from './screens/CreateUser';
+import Form from './screens/Form';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import theme from './theme';
-import Form from './screens/Form';
 import {RootStackParamList} from './types';
-import Modal from './components/Modal';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,6 +23,7 @@ function App(): React.JSX.Element {
   return (
     <PaperProvider theme={theme}>
       <Modal />
+      <Snackbar />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Login"

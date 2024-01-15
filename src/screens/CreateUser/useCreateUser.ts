@@ -12,7 +12,7 @@ import type {SCHEMA_TYPE} from './userSchema';
 
 const useCreateUser = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {setUser} = useStore();
+  const {setSnackbar, setUser} = useStore();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const {
@@ -42,6 +42,11 @@ const useCreateUser = () => {
       setIsLoading(false);
       navigation.navigate('ConfirmationCode');
     } catch (error) {
+      setSnackbar({
+        isVisible: true,
+        message: 'Erro ao criar usuário',
+        type: 'error',
+      });
       setIsLoading(false);
     }
   };

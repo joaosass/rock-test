@@ -13,6 +13,7 @@ import type {SCHEMA_TYPE} from './codeSchema';
 const useConfirmationCode = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {
+    setSnackbar,
     user: {email},
   } = useStore();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -36,6 +37,11 @@ const useConfirmationCode = () => {
       setIsLoading(false);
       navigation.navigate('Login');
     } catch (error) {
+      setSnackbar({
+        isVisible: true,
+        message: 'Erro ao confirmar código',
+        type: 'error',
+      });
       setIsLoading(false);
     }
   };
