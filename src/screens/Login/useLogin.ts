@@ -21,6 +21,7 @@ const useLogin = () => {
     formState: {errors, isValid},
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onBlur',
   });
 
   useEffect(() => {

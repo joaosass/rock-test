@@ -30,6 +30,7 @@ const useForm = () => {
     formState: {errors, isValid},
   } = useHookForm({
     resolver: yupResolver(schema),
+    mode: 'onBlur',
     defaultValues: {
       name: editingRock?.name || '',
       price: editingRock?.price

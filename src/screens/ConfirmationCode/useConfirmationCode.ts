@@ -23,6 +23,7 @@ const useConfirmationCode = () => {
     formState: {errors, isValid},
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onBlur',
   });
 
   const handleConfirmationCode = async ({code}: SCHEMA_TYPE) => {

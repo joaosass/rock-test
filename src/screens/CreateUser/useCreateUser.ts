@@ -21,6 +21,7 @@ const useCreateUser = () => {
     formState: {errors, isValid},
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'onBlur',
   });
 
   const handleCreateUser = async ({email, name, password}: SCHEMA_TYPE) => {

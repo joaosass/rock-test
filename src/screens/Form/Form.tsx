@@ -1,20 +1,24 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
-import {Controller} from 'react-hook-form';
-import {IconButton, Text, TextInput} from 'react-native-paper';
+import {IconButton, Text} from 'react-native-paper';
 
 import Button from '../../components/Button';
+import TextInput from '../../components/TextInput';
 import styles from '../../styles';
-import {
-  convertCurrencyStringToNumber,
-  convertNumberToCurrencyString,
-} from '../../utils/currency';
 
+import {SCHEMA_TYPE} from './formSchema';
 import useForm from './useForm';
 
 function Form(): React.JSX.Element {
-  const {control, handleBack, handleSubmit, isEditing, isLoading, isValid} =
-    useForm();
+  const {
+    control,
+    errors,
+    handleBack,
+    handleSubmit,
+    isEditing,
+    isLoading,
+    isValid,
+  } = useForm();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
@@ -25,35 +29,18 @@ function Form(): React.JSX.Element {
             {isEditing ? 'Edite' : 'Crie'} sua pedra
           </Text>
           <View style={styles.inputsContainer}>
-            <Controller
+            <TextInput<SCHEMA_TYPE>
               control={control}
+              label="Nome"
               name="name"
-              render={({field: {onChange, ...field}}) => (
-                <TextInput
-                  mode="outlined"
-                  label="Nome"
-                  onChangeText={onChange}
-                  {...field}
-                />
-              )}
+              errorMessage={errors.name?.message}
             />
-            <Controller
+            <TextInput<SCHEMA_TYPE>
               control={control}
+              label="Preço"
               name="price"
-              render={({field: {onChange, ...field}}) => (
-                <TextInput
-                  mode="outlined"
-                  label="Preço"
-                  onChangeText={(text: string) =>
-                    onChange(
-                      convertNumberToCurrencyString(
-                        convertCurrencyStringToNumber(text),
-                      ),
-                    )
-                  }
-                  {...field}
-                />
-              )}
+              errorMessage={errors.price?.message}
+              type="currency"
             />
           </View>
           <Button

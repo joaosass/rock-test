@@ -1,14 +1,15 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {SafeAreaView, ScrollView, View} from 'react-native';
-import {Controller} from 'react-hook-form';
-import {IconButton, Text, TextInput} from 'react-native-paper';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {IconButton, Text} from 'react-native-paper';
 
+import Button from '../../components/Button';
+import TextInput from '../../components/TextInput';
 import styles from '../../styles';
 import {RootStackParamList} from '../../types';
 
+import {SCHEMA_TYPE} from './codeSchema';
 import useConfirmationCode from './useConfirmationCode';
-import Button from '../../components/Button';
 
 type ConfirmationCodeProps = NativeStackScreenProps<
   RootStackParamList,
@@ -18,7 +19,8 @@ type ConfirmationCodeProps = NativeStackScreenProps<
 function ConfirmationCode({
   navigation,
 }: ConfirmationCodeProps): React.JSX.Element {
-  const {control, handleSubmit, isLoading, isValid} = useConfirmationCode();
+  const {control, errors, handleSubmit, isLoading, isValid} =
+    useConfirmationCode();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
@@ -28,20 +30,12 @@ function ConfirmationCode({
           Confirme seu email
         </Text>
         <Text>Digite abaixo o código de confirmação em seu email.</Text>
-        <View style={styles.inputsContainer}>
-          <Controller
-            control={control}
-            name="code"
-            render={({field: {onChange, ...field}}) => (
-              <TextInput
-                mode="outlined"
-                label="Código de confirmação"
-                onChangeText={onChange}
-                {...field}
-              />
-            )}
-          />
-        </View>
+        <TextInput<SCHEMA_TYPE>
+          control={control}
+          label="Código de confirmação"
+          name="code"
+          errorMessage={errors.code?.message}
+        />
         <Button
           isDisabled={isValid}
           isLoading={isLoading}

@@ -1,19 +1,20 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
-import {Controller} from 'react-hook-form';
-import {IconButton, Text, TextInput} from 'react-native-paper';
+import {IconButton, Text} from 'react-native-paper';
 
+import Button from '../../components/Button';
+import TextInput from '../../components/TextInput';
 import styles from '../../styles';
 import {RootStackParamList} from '../../types';
 
 import useCreateUser from './useCreateUser';
-import Button from '../../components/Button';
+import {SCHEMA_TYPE} from './userSchema';
 
 type CreateUserProps = NativeStackScreenProps<RootStackParamList, 'CreateUser'>;
 
 function CreateUser({navigation}: CreateUserProps): React.JSX.Element {
-  const {control, isLoading, isValid, handleSubmit} = useCreateUser();
+  const {control, errors, isLoading, isValid, handleSubmit} = useCreateUser();
 
   return (
     <SafeAreaView style={styles.fullScreen}>
@@ -23,58 +24,32 @@ function CreateUser({navigation}: CreateUserProps): React.JSX.Element {
           Crie sua conta
         </Text>
         <View style={styles.inputsContainer}>
-          <Controller
+          <TextInput<SCHEMA_TYPE>
             control={control}
+            label="Nome"
             name="name"
-            render={({field: {onChange, ...field}}) => (
-              <TextInput
-                mode="outlined"
-                label="Nome"
-                onChangeText={onChange}
-                {...field}
-              />
-            )}
+            errorMessage={errors.name?.message}
           />
-          <Controller
+          <TextInput<SCHEMA_TYPE>
             control={control}
+            label="E-mail"
             name="email"
-            render={({field: {onChange, ...field}}) => (
-              <TextInput
-                mode="outlined"
-                label="E-mail"
-                autoComplete="email"
-                inputMode="email"
-                autoCapitalize="none"
-                onChangeText={onChange}
-                {...field}
-              />
-            )}
+            errorMessage={errors.email?.message}
+            type="email"
           />
-          <Controller
+          <TextInput<SCHEMA_TYPE>
             control={control}
+            label="Senha"
             name="password"
-            render={({field: {onChange, ...field}}) => (
-              <TextInput
-                secureTextEntry
-                mode="outlined"
-                label="Senha"
-                onChangeText={onChange}
-                {...field}
-              />
-            )}
+            errorMessage={errors.password?.message}
+            type="password"
           />
-          <Controller
+          <TextInput<SCHEMA_TYPE>
             control={control}
+            label="Repetir senha"
             name="passwordRep"
-            render={({field: {onChange, ...field}}) => (
-              <TextInput
-                secureTextEntry
-                mode="outlined"
-                label="Repetir senha"
-                onChangeText={onChange}
-                {...field}
-              />
-            )}
+            errorMessage={errors.passwordRep?.message}
+            type="password"
           />
         </View>
         <Button
