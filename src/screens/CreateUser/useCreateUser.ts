@@ -12,7 +12,7 @@ import type {SCHEMA_TYPE} from './userSchema';
 
 const useCreateUser = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {setSnackbar, setUser} = useStore();
+  const {setSnackbar, setUsername} = useStore();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const {
@@ -39,7 +39,7 @@ const useCreateUser = () => {
           autoSignIn: true,
         },
       });
-      setUser(email, name);
+      setUsername(email);
       setIsLoading(false);
       navigation.navigate('ConfirmationCode');
     } catch (error) {

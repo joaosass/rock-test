@@ -12,10 +12,7 @@ import type {SCHEMA_TYPE} from './codeSchema';
 
 const useConfirmationCode = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    setSnackbar,
-    user: {email},
-  } = useStore();
+  const {setSnackbar, username} = useStore();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const {
@@ -31,7 +28,7 @@ const useConfirmationCode = () => {
     setIsLoading(true);
     try {
       await confirmSignUp({
-        username: email,
+        username,
         confirmationCode: code,
       });
       setIsLoading(false);

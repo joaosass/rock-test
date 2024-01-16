@@ -3,11 +3,6 @@ import {create} from 'zustand';
 import {devtools} from 'zustand/middleware';
 import {Rock} from './types';
 
-interface User {
-  email: string;
-  name: string;
-}
-
 interface Snackbar {
   isVisible: boolean;
   message?: string;
@@ -19,13 +14,13 @@ interface State {
   isModalVisible: boolean;
   refetchListKey: number;
   snackbar: Snackbar;
-  user: User;
+  username: string;
   token: string;
   setEditingRock: (rock?: Rock) => void;
   setIsModalVisible: (isVisible: boolean) => void;
   setRefetchListKey: () => void;
   setSnackbar: (snackbar: Snackbar) => void;
-  setUser: (email: string, name: string) => void;
+  setUsername: (username: string) => void;
   setToken: (token: string) => void;
 }
 
@@ -35,16 +30,13 @@ const useStore = create<State>()(
     isModalVisible: false,
     refetchListKey: 0,
     snackbar: {isVisible: false},
-    user: {
-      email: '',
-      name: '',
-    },
+    username: '',
     token: '',
     setEditingRock: editingRock => set(() => ({editingRock})),
     setIsModalVisible: isModalVisible => set(() => ({isModalVisible})),
     setRefetchListKey: () => set(() => ({refetchListKey: Math.random()})),
     setSnackbar: snackbar => set(() => ({snackbar})),
-    setUser: (email, name) => set(() => ({user: {email, name}})),
+    setUsername: username => set(() => ({username})),
     setToken: token => set(() => ({token})),
   })),
 );
