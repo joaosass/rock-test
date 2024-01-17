@@ -24,7 +24,7 @@ function Login({navigation}: LoginProps): React.JSX.Element {
           <Text variant="displaySmall" style={styles.title}>
             Olá,
           </Text>
-          <Text variant="headlineSmall">Bem-vindo(a) ao Ton</Text>
+          <Text variant="headlineSmall">Bem-vindo(a) ao Rockapp</Text>
         </View>
         <View style={styles.inputsContainer}>
           <TextInput<SCHEMA_TYPE>
