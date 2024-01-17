@@ -11,6 +11,7 @@ const renderHookPasswordRequirements = ({password = '', passwordRep = ''}) => {
         hasLetter,
         hasNumber,
         hasSpecialCharacter,
+        hasUpperCaseLetter,
       },
     },
   } = renderHook(() => usePasswordRequirements(password, passwordRep));
@@ -20,6 +21,7 @@ const renderHookPasswordRequirements = ({password = '', passwordRep = ''}) => {
     hasLetter,
     hasNumber,
     hasSpecialCharacter,
+    hasUpperCaseLetter,
   };
 };
 
@@ -34,6 +36,7 @@ describe('Testing hook usePasswordRequirements', () => {
         hasLetter: true,
         hasNumber: true,
         hasSpecialCharacter: true,
+        hasUpperCaseLetter: true,
       },
     ],
     [
@@ -45,6 +48,7 @@ describe('Testing hook usePasswordRequirements', () => {
         hasLetter: true,
         hasNumber: true,
         hasSpecialCharacter: true,
+        hasUpperCaseLetter: true,
       },
     ],
     [
@@ -56,6 +60,7 @@ describe('Testing hook usePasswordRequirements', () => {
         hasLetter: true,
         hasNumber: true,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: true,
       },
     ],
     [
@@ -67,6 +72,7 @@ describe('Testing hook usePasswordRequirements', () => {
         hasLetter: true,
         hasNumber: true,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: true,
       },
     ],
     [
@@ -78,6 +84,19 @@ describe('Testing hook usePasswordRequirements', () => {
         hasLetter: true,
         hasNumber: false,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: true,
+      },
+    ],
+    [
+      'test',
+      'test12',
+      {
+        hasEqualPasswords: false,
+        hasLength: false,
+        hasLetter: true,
+        hasNumber: false,
+        hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
     [
@@ -89,6 +108,7 @@ describe('Testing hook usePasswordRequirements', () => {
         hasLetter: false,
         hasNumber: false,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
   ])(

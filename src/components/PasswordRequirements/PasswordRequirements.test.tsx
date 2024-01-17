@@ -18,6 +18,7 @@ const renderPasswordRequirements = ({
   hasLetter = false,
   hasNumber = false,
   hasSpecialCharacter = false,
+  hasUpperCaseLetter = false,
 }) => {
   jest.spyOn(usePasswordRequirements, 'default').mockImplementation(() => ({
     hasEqualPasswords,
@@ -25,6 +26,7 @@ const renderPasswordRequirements = ({
     hasLetter,
     hasNumber,
     hasSpecialCharacter,
+    hasUpperCaseLetter,
   }));
 
   render(<PasswordRequirements />);
@@ -33,7 +35,7 @@ const renderPasswordRequirements = ({
 describe('Testing component PasswordRequirements', () => {
   it.each([
     [
-      5,
+      6,
       0,
       {
         hasEqualPasswords: false,
@@ -41,10 +43,11 @@ describe('Testing component PasswordRequirements', () => {
         hasLetter: false,
         hasNumber: false,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
     [
-      4,
+      5,
       1,
       {
         hasEqualPasswords: true,
@@ -52,10 +55,11 @@ describe('Testing component PasswordRequirements', () => {
         hasLetter: false,
         hasNumber: false,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
     [
-      3,
+      4,
       2,
       {
         hasEqualPasswords: true,
@@ -63,10 +67,11 @@ describe('Testing component PasswordRequirements', () => {
         hasLetter: false,
         hasNumber: false,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
     [
-      2,
+      3,
       3,
       {
         hasEqualPasswords: true,
@@ -74,10 +79,11 @@ describe('Testing component PasswordRequirements', () => {
         hasLetter: true,
         hasNumber: false,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
     [
-      1,
+      2,
       4,
       {
         hasEqualPasswords: true,
@@ -85,10 +91,11 @@ describe('Testing component PasswordRequirements', () => {
         hasLetter: true,
         hasNumber: true,
         hasSpecialCharacter: false,
+        hasUpperCaseLetter: false,
       },
     ],
     [
-      0,
+      1,
       5,
       {
         hasEqualPasswords: true,
@@ -96,6 +103,19 @@ describe('Testing component PasswordRequirements', () => {
         hasLetter: true,
         hasNumber: true,
         hasSpecialCharacter: true,
+        hasUpperCaseLetter: false,
+      },
+    ],
+    [
+      0,
+      6,
+      {
+        hasEqualPasswords: true,
+        hasLength: true,
+        hasLetter: true,
+        hasNumber: true,
+        hasSpecialCharacter: true,
+        hasUpperCaseLetter: true,
       },
     ],
   ])(
