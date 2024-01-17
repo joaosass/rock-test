@@ -22,6 +22,7 @@ function PasswordRequirements<T extends FieldValues>({
     hasLetter,
     hasNumber,
     hasSpecialCharacter,
+    hasUpperCaseLetter,
   } = usePasswordRequirement(passwordWatched, passwordRepWatched);
   const {
     colors: {error, primary},
@@ -36,6 +37,14 @@ function PasswordRequirements<T extends FieldValues>({
           <Icon color={error} size={15} source="alert-circle" />
         )}
         <Text>Ao menos uma letra</Text>
+      </View>
+      <View testID={`requirement-${hasUpperCaseLetter}`} style={styles.row}>
+        {hasUpperCaseLetter ? (
+          <Icon color={primary} size={15} source="check-circle" />
+        ) : (
+          <Icon color={error} size={15} source="alert-circle" />
+        )}
+        <Text>Ao menos uma letra maiúscula</Text>
       </View>
       <View testID={`requirement-${hasNumber}`} style={styles.row}>
         {hasNumber ? (

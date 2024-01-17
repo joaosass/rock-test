@@ -1,4 +1,9 @@
-import {LETTER_REGEX, NUMBER_REGEX, SPECIAL_CHARACTER_REGEX} from './constants';
+import {
+  LETTER_REGEX,
+  NUMBER_REGEX,
+  SPECIAL_CHARACTER_REGEX,
+  UPPERCASE_LETTER_REGEX,
+} from './constants';
 
 const usePasswordRequirement = (
   password: string = '',
@@ -10,6 +15,7 @@ const usePasswordRequirement = (
     hasSpecialCharacter: SPECIAL_CHARACTER_REGEX.test(password),
     hasLength: password.length >= 8,
     hasEqualPasswords: Boolean(password) && password === passwordRep,
+    hasUpperCaseLetter: UPPERCASE_LETTER_REGEX.test(password),
   };
 };
 
