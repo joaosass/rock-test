@@ -9,7 +9,7 @@ const usePasswordRequirement = (
     hasLetter: LETTER_REGEX.test(password),
     hasSpecialCharacter: SPECIAL_CHARACTER_REGEX.test(password),
     hasLength: password.length >= 8,
-    hasEqualPasswords: password && password === passwordRep,
+    hasEqualPasswords: Boolean(password) && password === passwordRep,
   };
 };
 

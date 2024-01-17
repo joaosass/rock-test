@@ -44,6 +44,7 @@ function TextInputComponent<T extends FieldValues>({
         name={name}
         render={({field: {onChange, ...field}}) => (
           <TextInput
+            testID="text-input"
             mode="outlined"
             label={label}
             {...handleType(type)}

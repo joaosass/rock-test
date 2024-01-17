@@ -29,7 +29,7 @@ function PasswordRequirements<T extends FieldValues>({
 
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
+      <View testID={`requirement-${hasLetter}`} style={styles.row}>
         {hasLetter ? (
           <Icon color={primary} size={15} source="check-circle" />
         ) : (
@@ -37,7 +37,7 @@ function PasswordRequirements<T extends FieldValues>({
         )}
         <Text>Ao menos uma letra</Text>
       </View>
-      <View style={styles.row}>
+      <View testID={`requirement-${hasNumber}`} style={styles.row}>
         {hasNumber ? (
           <Icon color={primary} size={15} source="check-circle" />
         ) : (
@@ -45,7 +45,7 @@ function PasswordRequirements<T extends FieldValues>({
         )}
         <Text>Ao menos um número</Text>
       </View>
-      <View style={styles.row}>
+      <View testID={`requirement-${hasSpecialCharacter}`} style={styles.row}>
         {hasSpecialCharacter ? (
           <Icon color={primary} size={15} source="check-circle" />
         ) : (
@@ -53,7 +53,7 @@ function PasswordRequirements<T extends FieldValues>({
         )}
         <Text>Ao menos um caractere especial</Text>
       </View>
-      <View style={styles.row}>
+      <View testID={`requirement-${hasLength}`} style={styles.row}>
         {hasLength ? (
           <Icon color={primary} size={15} source="check-circle" />
         ) : (
@@ -61,7 +61,7 @@ function PasswordRequirements<T extends FieldValues>({
         )}
         <Text>Ter no minímo 8 caracteres</Text>
       </View>
-      <View style={styles.row}>
+      <View testID={`requirement-${hasEqualPasswords}`} style={styles.row}>
         {hasEqualPasswords ? (
           <Icon color={primary} size={15} source="chec-circle" />
         ) : (

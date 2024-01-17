@@ -19,7 +19,11 @@ function ButtonComponent({
       disabled={isDisabled || isLoading}
       mode="contained"
       onPress={onPress}>
-      {isLoading ? <ActivityIndicator size="small" /> : text}
+      {isLoading ? (
+        <ActivityIndicator size="small" testID="button-loading" />
+      ) : (
+        text
+      )}
     </Button>
   );
 }

@@ -29,8 +29,16 @@ function RockCard({name, price, id}: Rock): React.JSX.Element {
         <Text>{name}</Text>
       </View>
       <View style={styles.row}>
-        <IconButton icon="pencil" onPress={handleEditRock} />
-        <IconButton icon="delete" onPress={handleDeleteRock} />
+        <IconButton
+          testID="rock-card-edit"
+          icon="pencil"
+          onPress={handleEditRock}
+        />
+        <IconButton
+          testID="rock-card-delete"
+          icon="delete"
+          onPress={handleDeleteRock}
+        />
       </View>
     </View>
   );
