@@ -63,12 +63,7 @@ const remove = async Key => {
   }
 };
 
-exports.handler = async ({
-  body,
-  httpMethod,
-  queryStringParameters,
-  ...event
-}) => {
+exports.handler = async ({body, httpMethod, queryStringParameters}) => {
   let response;
   switch (httpMethod) {
     case 'GET':
