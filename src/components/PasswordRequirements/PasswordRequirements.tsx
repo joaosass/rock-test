@@ -72,7 +72,7 @@ function PasswordRequirements<T extends FieldValues>({
       </View>
       <View testID={`requirement-${hasEqualPasswords}`} style={styles.row}>
         {hasEqualPasswords ? (
-          <Icon color={primary} size={15} source="chec-circle" />
+          <Icon color={primary} size={15} source="check-circle" />
         ) : (
           <Icon color={error} size={15} source="alert-circle" />
         )}

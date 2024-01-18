@@ -37,7 +37,7 @@ function ConfirmationCode({
           errorMessage={errors.code?.message}
         />
         <Button
-          isDisabled={isValid}
+          isDisabled={!isValid}
           isLoading={isLoading}
           text="Criar conta"
           onPress={handleSubmit}
