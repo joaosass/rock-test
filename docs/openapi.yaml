@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: API de Pedras
+  version: 1.0.0
+paths:
+  /rocks:
+    get:
+      summary: Obter lista de pedras
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              example: 
+                - id: "1"
+                  name: "Pedra A"
+                  price: 10.99
+                - id: "2"
+                  name: "Pedra B"
+                  price: 15.99
+      security:
+        - BearerAuth: []
+    post:
+      summary: Criar uma nova pedra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '201':
+          description: Pedra criada com sucesso
+          content:
+            application/json:
+              example: { message: "Pedra criada com sucesso" }
+        '400':
+          description: Erro ao criar pedra
+          content:
+            application/json:
+              example: { message: "Erro ao criar pedra" }
+      security:
+        - BearerAuth: []
+    put:
+      summary: Atualizar uma pedra existente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '200':
+          description: Pedra atualizada com sucesso
+          content:
+            application/json:
+              example: { message: "Pedra atualizada com sucesso" }
+        '400':
+          description: Erro ao atualizar pedra
+          content:
+            application/json:
+              example: { message: "Erro ao atualizar pedra" }
+      security:
+        - BearerAuth: []
+    delete:
+      summary: Remover uma pedra
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pedra removida com sucesso
+          content:
+            application/json:
+              example: { message: "Pedra removida com sucesso" }
+        '400':
+          description: Erro ao remover pedra
+          content:
+            application/json:
+              example: { message: "Erro ao remover pedra" }
+      security:
+        - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
