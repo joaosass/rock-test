@@ -1,79 +1,42 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Execurando localmente
 
-# Getting Started
+>**Obs**: Garantir que o ambiente esteja configurado de acordo com a documentação do [React Native](https://reactnative.dev/docs/environment-setup).
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Execute os seguintes comandos:
 
-## Step 1: Start the Metro Server
+- ```npm install```
+- ```npm start``` (e depois pressiona ```a``` para iniciar o emulador do Android)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Decisões técnicas
 
-```bash
-# using npm
-npm start
+### AWS Amplify
 
-# OR using Yarn
-yarn start
-```
+Optei por usar o Amplify para simplificar o processo de criar recursos da AWS e integrá-los. Por exemplo, criar um Cognito para criação/autenticação de usuários, criar um Lambda para o backend, criar um Api Gateway para permitir realizar request, garantir que apenas usuários autenticados na minha User Pool pudessem realizar as requests e também realizar o controle de rate-limit dessa api e criar um banco de dados DynamoDB. Sem contar da facilidade para o proceso de deploy da aplicação e de infraestrutura como código.
 
-## Step 2: Start your Application
+### Zustand
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Zustand é uma forma muito simples de lidar com o estado global da aplicação, tendo um boilerplate enxuto, baixa curva de aprendizagem e facilitando um melhor controle de re-renders apenas quando houver mudanças.
 
-### For Android
+### React-hook-form/yup
 
-```bash
-# using npm
-npm run android
+Esse conjunto de ferramentas sempre me trouxe um ganho de produtividade para criar experiências formulários que fossem fáceis de fazer/controlar e também trazer uma expriência de usuário que fosse fácil não deixar o usuário no escuro sem entender sobre as regras de preenchimento.
 
-# OR using Yarn
-yarn android
-```
+### Jest/@testing-library/react-native
 
-### For iOS
+O conjunto de Jest + @testing-library/react-native traz uma facilidade para encontrar os elementos que vão ser testados, disparar eventos e até testar hooks customizados de maneira assertiva.
 
-```bash
-# using npm
-npm run ios
 
-# OR using Yarn
-yarn ios
-```
+## Arquitetura de pastas
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### components
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+A pasta ```components``` é onde coloco os componentes que são asbtrações que possam ser retulizadas em diversos lugares da aplicação ou que valham realizar essa separação.
 
-## Step 3: Modifying your App
+### screens
 
-Now that you have successfully run the app, let's modify it.
+A pasta ```screens``` é onde são organizadas as telas do App. Em projetos maiores gosto de criar a estrutura de features, onde screen seja um conjunto de features e uma feature é um conjunto de components e utils, pensando no cenário onde uma feature também possa ser retutilizada atrás do projeto.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+### utils
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+A pasta ```utils``` é onde são organizadas as abstrações de lógicas que podem ser reutilizadas atrás da aplicação. Geralmente também crio uma pasta hooks para organizar os hooks são mais genérico para aplicação, como o exemplo em questão era mais simples todos os hooks foram feitos especificamente para cada tela e assim considero que fazia mais sentido mantes eles mais próximos de onde vão ser usados efetivamente.
